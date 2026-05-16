@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Recommend from './components/Recommend'
+import Location from './components/Location'
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <Navbar />
       <Hero />
       <Recommend />
+      <Location />
     </div>
   )
 }

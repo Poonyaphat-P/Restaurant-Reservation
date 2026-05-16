@@ -42,11 +42,31 @@ export default function Recommend() {
       <p className="text-white text-left text-xl px-16 mt-2 font-medium">
         Crafted moments, shared by our guests.
       </p>
-      <div className="px-16 mt-10">
+      <div className="px-16 mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
         <Review 
           stars={5} 
-          review="Absolutely world-class!" 
-          name="Kuro Fan" 
+          review="An absolute masterclass in Japanese cuisine. The Omakase was a revelation." 
+          name="Alexander M."
+        />
+        <Review 
+          stars={5} 
+          review="The Wagyu A5 Steak melts in your mouth. Exceptional service and atmosphere." 
+          name="Sarah Jenkins"
+        />
+        <Review 
+          stars={5} 
+          review="Minimalist, serene, and authentic. The Uni was incredibly creamy and fresh." 
+          name="David Chen"
+        />
+        <Review 
+          stars={5} 
+          review="Authentic flavors that remind me of Tokyo. The chef's precision is amazing." 
+          name="Yuki Sato"
+        />
+        <Review 
+          stars={4} 
+          review="Worth the wait for a reservation. The Otoro was the best I've ever had." 
+          name="Michael P."
         />
       </div>
 
