@@ -1,16 +1,19 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Recommend from './components/Recommend'
-import Location from './components/Location'
+import Home from './pages/Home'
+import MenuPage from './pages/MenuPage'
 
 function App() {
   return (
-    <div className="min-h-screen bg-black">
-      <Navbar />
-      <Hero />
-      <Recommend />
-      <Location />
-    </div>
+    <BrowserRouter>
+      <div className="min-h-screen bg-black">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/menu" element={<MenuPage />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   )
 }
 
