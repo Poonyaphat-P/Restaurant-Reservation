@@ -1,6 +1,6 @@
 import PageHeader from "../components/PageHeader";
-// ถ้ายากหารูปใหม่ไม่ได้ เอา categoryBg มาใช้ชั่วคราวก่อนก็ได้ครับ
 import categoryBg from '../assets/categorytab_wallpaper.avif'; 
+import ReservationForm from "../components/ReservationForm";
 
 export default function ReservationPage() {
   return (
@@ -11,7 +11,7 @@ export default function ReservationPage() {
         backgroundImage={categoryBg} 
       />
       
-      {/* เดี๋ยวเรามาสร้างฟอร์มตรงนี้ */}
+      <ReservationForm />
     </div>
   )
 }
