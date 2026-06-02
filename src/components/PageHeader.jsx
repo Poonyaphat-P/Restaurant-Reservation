@@ -1,7 +1,7 @@
 export default function PageHeader({ title, subtitle, backgroundImage}) {
     return (
         <div 
-        className="relative bg-cover bg-center pt-28 py-8 px-4" 
+        className="relative bg-cover bg-center pt-28 py-8 px-4 " 
         style={{ backgroundImage: `url(${backgroundImage})` }}
         >
         {/* Black Film */}

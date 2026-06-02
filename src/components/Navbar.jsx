@@ -6,9 +6,8 @@ import { Link } from 'react-router-dom'
 const navigation = [
   { name: 'Menu', href: '/menu' },
   { name: 'Reservations', href: '/reservation' },
-  { name: 'Our Story', href: '#' },
-  { name: 'Contact', href: '#' },
-  { name: 'Location', href: '#' }
+  { name: 'Our Story', href: '/about' },
+  { name: 'Contact', href: '/contact' },
 ]
 
 export default function Navbar() {

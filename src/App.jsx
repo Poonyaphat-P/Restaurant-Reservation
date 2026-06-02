@@ -3,6 +3,8 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import MenuPage from './pages/MenuPage'
 import ReservationPage from './pages/ReservationPage'
+import AboutUsPage from './pages/AboutUs'
+import ContactPage from './pages/ContactPage'
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/menu" element={<MenuPage />} />
           <Route path="/reservation" element={<ReservationPage />} />
+          <Route path="/about" element={<AboutUsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </div>
     </BrowserRouter>
