@@ -6,3 +6,23 @@
   --font-serif: "Allura", cursive;
 }
 
+body {
+  background-color: black;
+  margin: 0;
+}
+
+@layer utilities {
+  @keyframes slowlyShow {
+    0% {
+      opacity: 0;
+    }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-slow-fade {
+  opacity: 0; 
+  animation: slowlyShow 1s ease-in-out forwards; 
+}
+}

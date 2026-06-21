@@ -6,10 +6,45 @@ export default function ContactForm() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+
+  const [notification, setNotification] = useState(null)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const contactForm = new FormData()
+    
+    contactForm.append('name', name)
+    contactForm.append('email', email)
+    contactForm.append('phone', phone)
+    contactForm.append('message', message)
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        body: contactForm,
+      })
+
+      const data = await response.json()
+
+      if (response.ok && !data.error) {
+        setNotification({ type: 'success', message: data.message || 'Message sent successfully!' })
+        setName('')
+        setEmail('')
+        setPhone('')
+        setMessage('')
+      } else {
+        setNotification({ type: 'error', message: data.message || 'Failed to send message. Please try again.' })
+      }
+    } catch (err) {
+      console.error('fetch error', err)
+      setNotification({ type: 'error', message: 'An error occurred. Please try again.' })
+    }
+  }
   
   return (
     <div className="flex flex-col gap-4 ">
-      <form className="flex flex-col gap-2">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
         <label htmlFor="name" className='text-white text-md font-thin'>Name</label>
         <input type="text" 
           id="name"
@@ -58,7 +93,9 @@ export default function ContactForm() {
           placeholder="Message"
         />
 
-        <button className=" border border-slate-300 bg-slate-50 text-slate-500 hover:border-gray-500 focus:outline-none focus:border-gray-500 w-20 mt-2 mx-auto ">
+        <button 
+          type="submit"
+          className=" border border-slate-300 bg-slate-50 text-slate-500 hover:border-gray-500 focus:outline-none focus:border-gray-500 w-20 mt-2 mx-auto ">
           Submit
         </button>
       </form>

@@ -1,7 +1,19 @@
 import DishCard from './DishCard'
 import Review from './Review'
+import { useState, useEffect } from 'react'
 
 export default function Recommend() {
+  const [menuItems, setMenuItems] = useState([])
+
+  useEffect(() => {
+    fetch('/api/menu')
+      .then(res => res.json())
+      .then(data => {
+        setMenuItems(data.data)
+      })
+      .catch(err => console.error(err))
+  }, [])
+
   return (
     <div className="py-24 bg-black"> {/* add container */}
       <p className="text-white text-left text-5xl px-16 font-semibold"> {/* add container */}
@@ -10,31 +22,28 @@ export default function Recommend() {
       <p className="text-white text-left text-xl px-16 mt-2 font-medium">
         Signature Flavors of KURO
       </p>
+
       {/* 1. Create a wrapper for the cards */}
       <div className="mt-10 px-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-  
-        <DishCard 
-          title="Premium Sashimi Set" 
-          price="฿850" 
-          image=""
-          description="Selection of the freshest seasonal fish from Toyosu Market."
-        />
-        <DishCard 
-          title="Wagyu A5 Steak" 
-          price="฿1,200" 
-          image=""
-        />
-        <DishCard 
-          title="Wagyu A5 Steak" 
-          price="฿1,200" 
-          image=""
-        />
-        <DishCard 
-          title="Wagyu A5 Steak" 
-          price="฿1,200" 
-          image=""
-        />
-      </div>
+        
+        {/* 2. Map over menuItems state */}
+        {menuItems.filter(item => item.is_recommended).map((item) => (
+          <DishCard 
+            key={item.id}
+            title={item.name}
+            price={`฿${item.price}`}
+            image={item.image}
+            description={item.description}
+          />
+        ))}
+
+        {menuItems.filter(item => item.is_recommended).length === 0 && (
+          <div className="col-span-full text-center text-gray-500 py-10">
+            No recommended dishes yet. Mark items as "Show on Homepage" in the admin panel.
+          </div>
+        )}
+
+</div>
 
       <p className="text-white text-left text-5xl px-16 mt-10 font-semibold">
         Review from our customers

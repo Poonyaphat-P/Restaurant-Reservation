@@ -1,4 +1,5 @@
 import heroBg from '../assets/Homepage Background.jpg'
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
   return (
@@ -13,7 +14,7 @@ export default function Hero() {
       </div>
 
       <div className="relative isolate px-6 pt-14 lg:px-8 z-10 w-full">
-        <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+        <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-40">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-400 ring-1 ring-white/10 hover:ring-white/20">
               KURO | Japanese Cuisine | 2026
@@ -27,15 +28,18 @@ export default function Hero() {
               Indulge in a culinary journey crafted by world-class chefs. From fresh ingredients to an elegant atmosphere, we bring you the ultimate dining experience.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
-                href="#"
+              <Link
+                to="/reservation"
                 className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-black shadow-xs hover:bg-gray-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 Book a Table
-              </a>
-              <a href="#" className="text-sm/6 font-semibold text-white">
+              </Link>
+              <Link
+                to="/menu"
+                className="text-sm/6 font-semibold text-white"
+              >
                 View Menu <span aria-hidden="true">→</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

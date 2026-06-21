@@ -1,6 +1,7 @@
 import PageHeader from "../components/PageHeader"
 import categoryBg from "../assets/categorytab_wallpaper.avif"
 import ProfileCard from "../components/ProfileCard"
+
 function AboutUsPage() {
   return (
     <div>
@@ -39,7 +40,7 @@ function AboutUsPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-8">
             <ProfileCard 
               image=""
               name="Chef's Name"

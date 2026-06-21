@@ -4,7 +4,7 @@ export default function DishCard({ image, title, price, description }) {
       {/* Image Container */}
       <div className="aspect-square w-full overflow-hidden">
         <img 
-          src={image || "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=1000&auto=format&fit=crop"} 
+          src={image ? `/uploads/${image}` : "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=1000&auto=format&fit=crop"}
           alt={title} 
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
         />

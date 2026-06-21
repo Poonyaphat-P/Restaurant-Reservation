@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom' 
 
 const navigation = [
   { name: 'Menu', href: '/menu' },
@@ -12,6 +12,8 @@ const navigation = [
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const location = useLocation()                       
+  if (location.pathname === '/admin') return null        
 
   return (
     <header className="absolute inset-x-0 top-0 z-50 ">
@@ -39,9 +41,9 @@ export default function Navbar() {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm/6 font-semibold text-white">
+          <Link to="/login" className="text-sm/6 font-semibold text-white">
             Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+          </Link>
         </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
@@ -75,12 +77,13 @@ export default function Navbar() {
                 ))}
               </div>
               <div className="py-6">
-                <a
-                  href="#"
+                <Link
+                  to="/login"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-white hover:bg-white/5"
                 >
                   Log in
-                </a>
+                </Link>
               </div>
             </div>
           </div>

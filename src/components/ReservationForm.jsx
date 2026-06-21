@@ -20,13 +20,56 @@ export default function ReservationForm() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
+  const [notification, setNotification] = useState(null);
   const dateInputRef = useRef(null);
   const timeInputRef = useRef(null);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const reservationForm = new FormData()
+    
+    reservationForm.append('partySize', parseInt(guests, 10))
+    reservationForm.append('reservationDate', date)
+    reservationForm.append('reservationTime', time.replace(' PM', ''))
+    reservationForm.append('f_name', firstname)
+    reservationForm.append('l_name', lastname)
+    reservationForm.append('phone', phone)
+    reservationForm.append('email', email)
+    reservationForm.append('description', description)
+    reservationForm.append('status', 'pending')
+
+    try {
+      const response = await fetch('/api/reservation', {
+        method: 'POST',
+        body: reservationForm,
+      })
+
+      const data = await response.json()
+
+      if (response.ok && !data.error) {
+        setNotification({ type: 'success', message: data.message || 'Message sent successfully!' })
+        setGuests('')
+        setDate('')
+        setTime('')
+        setFirstName('')
+        setLastName('')
+        setPhone('')
+        setEmail('')
+        setDescription('')
+      } else {
+        setNotification({ type: 'error', message: data.message || 'Failed to send message. Please try again.' })
+      }
+    } catch (err) {
+      console.error('fetch error', err)
+      setNotification({ type: 'error', message: 'An error occurred. Please try again.' })
+    }
+  }
+  
   return (
-    <div>
-      <div className="grid grid-cols-3 bg-white mx-40 rounded-full mt-10">
-        <label htmlFor="guests" className="relative bg-white flex items-center justify-center py-4 rounded-l-full cursor-pointer hover:bg-gray-200">
+    <div className="pb-12 px-4 sm:px-10 md:px-20 lg:px-40">
+      <div className="grid grid-cols-1 md:grid-cols-3 bg-white rounded-2xl md:rounded-full mt-10 shadow-lg">
+        <label htmlFor="guests" className="relative bg-white flex items-center justify-center py-4 rounded-t-2xl md:rounded-l-full cursor-pointer hover:bg-gray-200">
           <span className="text-black font-semibold">Guests : {guests}</span>
           <select 
             id="guests" 
@@ -46,7 +89,7 @@ export default function ReservationForm() {
             <option value="10 Guests">10 Guests</option>
           </select>
         </label>
-        <label onClick={() => dateInputRef.current.showPicker()} htmlFor="date" className="relative bg-white flex items-center justify-center py-4 cursor-pointer hover:bg-gray-200 border-x border-gray-200">
+        <label onClick={() => dateInputRef.current.showPicker()} htmlFor="date" className="relative bg-white flex items-center justify-center py-4 cursor-pointer hover:bg-gray-200 border-y md:border-y-0 md:border-x border-gray-200">
           <span className="text-black font-semibold"> {date ? `Date: ${date}` : "Date :"}</span>
           <input type="date" 
             id="date" 
@@ -56,7 +99,7 @@ export default function ReservationForm() {
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
           />
         </label>
-         <label htmlFor="time" className="relative bg-white flex items-center justify-center py-4 rounded-r-full cursor-pointer hover:bg-gray-200">
+         <label htmlFor="time" className="relative bg-white flex items-center justify-center py-4 rounded-b-2xl md:rounded-r-full cursor-pointer hover:bg-gray-200">
           <span className="text-black font-semibold">Time : {time}</span>
           <select 
             id="time" 
@@ -77,14 +120,14 @@ export default function ReservationForm() {
           </select>
         </label>
       </div>
-      <div className ="mx-40 my-10 border border-white/10 bg-black/20 backdrop-blur-sm rounded-3xl">
-        <div className="text-left text-white mt-6 mb-2">
-          <h1 className="text-5xl font-semibold px-5 font-serif">Fill in your reservation details</h1>
+      <div className ="my-10 border border-white/10 bg-black/20 backdrop-blur-sm rounded-3xl p-4 md:p-8">
+        <div className="text-left text-white mt-4 mb-6">
+          <h1 className="text-3xl md:text-5xl font-semibold font-serif">Fill in your reservation details</h1>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 border border-white/10">
           <div>
             <div className="flex flex-col gap-4">
-              <form className="flex flex-col gap-4 py-4 px-4 ">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4 py-4 px-4 ">
                 <label htmlFor="firstName" className='text-white text-lg'>First name</label>
                   <input type="text" 
                     id="firstName"
@@ -144,7 +187,9 @@ export default function ReservationForm() {
                       focus:outline-none focus:border-gray-500"
                     placeholder="Add any special requests or preferences" 
                   />
-                <button className="rounded-sm border border-slate-300 bg-slate-50 text-slate-900 hover:border-gray-500 focus:outline-none focus:border-gray-500 mx-auto w-32 mt-2 ">
+                <button 
+                  type="submit"
+                  className="rounded-sm border border-slate-300 bg-slate-50 text-slate-900 hover:border-gray-500 focus:outline-none focus:border-gray-500 mx-auto w-32 mt-2 ">
                   Submit
                 </button>
               </form>

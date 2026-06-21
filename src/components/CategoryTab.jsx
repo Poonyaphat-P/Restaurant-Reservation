@@ -1,5 +1,3 @@
-import categoryBg from '../assets/categorytab_wallpaper.avif'
-
 export default function CategoryTab({activeCategory, setActiveCategory}) {
   return (
     <>

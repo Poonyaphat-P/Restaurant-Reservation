@@ -1,22 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function Carousel({ images }) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const intervalRef = useRef(null);
 
-  const handleNextSlide = () => {
+  const goToNextSlide = () => {
     setCurrentSlide((prev) => 
       prev === images.length - 1 ? 0 : prev + 1
     );
+  };
 
-    restartAutoplay()
+  const handleNextSlide = () => {
+    goToNextSlide();
+    restartAutoplay();
   };
 
   const handlePrevSlide = () => {
     setCurrentSlide((prev) => 
       prev === 0 ? images.length - 1 : prev - 1
     );
+    restartAutoplay();
+  };
 
-    restartAutoplay()
+  const startAutoplay = () => {
+    intervalRef.current = setInterval(goToNextSlide, 3000);
   };
 
   const restartAutoplay = () => {
@@ -24,10 +31,9 @@ export default function Carousel({ images }) {
     startAutoplay();
   };
 
-  // Autoplay every 3 seconds
   useEffect(() => {
-    const autoplay = setInterval(handleNextSlide, 3000);
-    return () => clearInterval(autoplay);
+    startAutoplay();
+    return () => clearInterval(intervalRef.current);
   }, [images.length]);
   
   return (
