@@ -24,26 +24,27 @@ export default function Recommend() {
       </p>
 
       {/* 1. Create a wrapper for the cards */}
-      <div className="mt-10 px-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="mx-15 mt-10 px-16 flex overflow-x-auto gap-8 pb-8 snap-x" style={{ scrollbarWidth: 'none' }}>
         
         {/* 2. Map over menuItems state */}
         {menuItems.filter(item => item.is_recommended).map((item) => (
-          <DishCard 
-            key={item.id}
-            title={item.name}
-            price={`฿${item.price}`}
-            image={item.image}
-            description={item.description}
-          />
+          <div key={item.id} className="w-[220px] sm:w-[280px] flex-shrink-0 snap-start">
+            <DishCard 
+              title={item.name}
+              price={`฿${item.price}`}
+              image={item.image}
+              description={item.description}
+            />
+          </div>
         ))}
 
         {menuItems.filter(item => item.is_recommended).length === 0 && (
-          <div className="col-span-full text-center text-gray-500 py-10">
+          <div className="w-full text-center text-gray-500 py-10">
             No recommended dishes yet. Mark items as "Show on Homepage" in the admin panel.
           </div>
         )}
 
-</div>
+      </div>
 
       <p className="text-white text-left text-5xl px-16 mt-10 font-semibold">
         Review from our customers
