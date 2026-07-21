@@ -32,7 +32,7 @@ export default function Recommend() {
       <p className="text-white text-left text-5xl px-16 font-semibold"> {/* add container */}
         Recommended Dishes
       </p>
-      <p className="text-white text-left text-xl px-16 mt-2 font-medium">
+      <p className="text-white text-left text-xl px-16 mt-2 font-medium mb-10">
         Signature Flavors of KURO
       </p>
 
