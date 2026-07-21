@@ -49,8 +49,8 @@ export default function Navbar() {
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           {isAdmin ? (
-            <button type="button" onClick={handleLogout} className="text-sm/6 font-semibold text-white">
-              Logout <span aria-hidden="true">&rarr;</span>
+            <button type="button" onClick={handleLogout} className="text-sm/6 font-semibold text-white cursor-pointer">
+              Log out <span aria-hidden="true">&rarr;</span>
             </button>
           ) : (
             <Link to="/login" className="text-sm/6 font-semibold text-white">

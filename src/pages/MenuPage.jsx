@@ -3,6 +3,7 @@ import CategoryTab from "../components/CategoryTab";
 import DishCard from "../components/DishCard";
 import PageHeader from "../components/PageHeader"
 import categoryBg from "../assets/categorytab_wallpaper.avif"
+import { apiUrl } from "../utils/apiBase"
 function MenuPage() {
 
   const [activeCategory, setActiveCategory] = useState("Seasonal");
@@ -22,7 +23,7 @@ function MenuPage() {
   )
 
   useEffect(() => {
-    fetch('/api/menu')
+    fetch(apiUrl('/api/menu'))
       .then(res => res.json())
       .then(data => {
         console.log("DATA =", data)

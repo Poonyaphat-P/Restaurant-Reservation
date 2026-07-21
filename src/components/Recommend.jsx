@@ -1,6 +1,7 @@
 import DishCard from './DishCard'
 import Review from './Review'
 import { useState, useEffect, useRef } from 'react'
+import { apiUrl } from '../utils/apiBase'
 
 export default function Recommend() {
   const [menuItems, setMenuItems] = useState([])
@@ -18,7 +19,7 @@ export default function Recommend() {
   }
 
   useEffect(() => {
-    fetch('/api/menu')
+    fetch(apiUrl('/api/menu'))
       .then(res => res.json())
       .then(data => {
         setMenuItems(data.data)

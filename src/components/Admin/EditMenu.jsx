@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import { Image as ImageIcon } from 'lucide-react'
 import authFetch from '../../utils/authFetch'
+import { apiUrl } from '../../utils/apiBase'
 
 export default function EditMenu() {
 
@@ -143,8 +144,8 @@ export default function EditMenu() {
 
               {image ? (
                 <img
-                  src={typeof image === 'string' 
-                  ? `/uploads/${image}`          // รูปเดิมจาก DB
+                  src={typeof image === 'string'
+                  ? apiUrl(`/uploads/${image}`)  // รูปเดิมจาก DB
                   : URL.createObjectURL(image)   // รูปที่เพิ่งเลือกใหม่
                   }
                   alt="preview"
@@ -278,8 +279,8 @@ export default function EditMenu() {
                     <div className="grid grid-cols-[1fr_2fr]">
                       <div>
                         <img 
-                          src={item.image ? `/uploads/${item.image}` : "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=1000&auto=format&fit=crop"} 
-                          alt={item.name} 
+                          src={item.image ? apiUrl(`/uploads/${item.image}`) : "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=1000&auto=format&fit=crop"}
+                          alt={item.name}
                           className="w-24 h-24 object-cover rounded-md"
                         />
                       </div>

@@ -1,10 +1,12 @@
+import { apiUrl } from "../utils/apiBase"
+
 export default function DishCard({ image, title, price, description }) {
   return (
     <div className="group relative overflow-hidden bg-neutral-900/50 backdrop-blur-sm border border-white/10 rounded-2xl transition-all duration-300 hover:bg-neutral-800 hover:border-white/20 hover:-translate-y-1">
       {/* Image Container */}
       <div className="aspect-square w-full overflow-hidden">
         <img 
-          src={image ? `/uploads/${image}` : "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=1000&auto=format&fit=crop"}
+          src={image ? apiUrl(`/uploads/${image}`) : "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=1000&auto=format&fit=crop"}
           alt={title} 
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
         />

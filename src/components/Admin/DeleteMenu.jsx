@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import authFetch from '../../utils/authFetch'
+import { apiUrl } from '../../utils/apiBase'
 
 export default function DeleteMenu() {
 
@@ -118,8 +119,8 @@ export default function DeleteMenu() {
                     <div className="grid grid-cols-[1fr_2fr]">
                       <div>
                         <img 
-                          src={item.image ? `/uploads/${item.image}` : "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=1000&auto=format&fit=crop"} 
-                          alt={item.name} 
+                          src={item.image ? apiUrl(`/uploads/${item.image}`) : "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=1000&auto=format&fit=crop"}
+                          alt={item.name}
                           className="w-24 h-24 object-cover rounded-md"
                         />
                       </div>

@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import Carousel from "./Carousel.jsx";
+import { apiUrl } from "../utils/apiBase";
 import sample1 from "../assets/sample1.jpg";
 import sample2 from "../assets/sample2.jpg";
 import sample3 from "../assets/sample3.jpg";
@@ -40,7 +41,7 @@ export default function ReservationForm() {
     reservationForm.append('status', 'pending')
 
     try {
-      const response = await fetch('/api/reservation', {
+      const response = await fetch(apiUrl('/api/reservation'), {
         method: 'POST',
         body: reservationForm,
       })
@@ -69,7 +70,7 @@ export default function ReservationForm() {
   return (
     <div className="pb-12 px-2 sm:px-5 md:px-10 lg:px-20">
       <div className="grid grid-cols-1 md:grid-cols-3 bg-white rounded-2xl md:rounded-full mt-10 shadow-lg">
-        <label htmlFor="guests" className="relative bg-white flex items-center justify-center py-4 rounded-t-2xl md:rounded-l-full cursor-pointer hover:bg-gray-200">
+        <label htmlFor="guests" className="relative bg-white flex items-center justify-center py-3 rounded-t-2xl md:rounded-l-full cursor-pointer hover:bg-gray-200">
           <span className="text-black font-semibold">Guests : {guests}</span>
           <select 
             id="guests" 
@@ -89,7 +90,7 @@ export default function ReservationForm() {
             <option value="10 Guests">10 Guests</option>
           </select>
         </label>
-        <label onClick={() => dateInputRef.current.showPicker()} htmlFor="date" className="relative bg-white flex items-center justify-center py-4 cursor-pointer hover:bg-gray-200 border-y md:border-y-0 md:border-x border-gray-200">
+        <label onClick={() => dateInputRef.current.showPicker()} htmlFor="date" className="relative bg-white flex items-center justify-center py-3 cursor-pointer hover:bg-gray-200 border-y md:border-y-0 md:border-x border-gray-200">
           <span className="text-black font-semibold"> {date ? `Date: ${date}` : "Date :"}</span>
           <input type="date" 
             id="date" 
@@ -99,7 +100,7 @@ export default function ReservationForm() {
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
           />
         </label>
-         <label htmlFor="time" className="relative bg-white flex items-center justify-center py-4 rounded-b-2xl md:rounded-r-full cursor-pointer hover:bg-gray-200">
+         <label htmlFor="time" className="relative bg-white flex items-center justify-center py-3 rounded-b-2xl md:rounded-r-full cursor-pointer hover:bg-gray-200">
           <span className="text-black font-semibold">Time : {time}</span>
           <select 
             id="time" 
@@ -197,7 +198,7 @@ export default function ReservationForm() {
 
               <div>
                 <h1 className="text-white text-4xl font-serif px-3">A Dining Experience to Remember</h1>
-                <p className="text-white text-md px-3 py-4 ">At our restaurant, every reservation is more than just a meal — 
+                <p className="text-white text-md px-3 py-4 text-justify">At our restaurant, every reservation is more than just a meal — 
                   it is an experience carefully crafted to bring people together through exceptional food, warm hospitality, 
                   and an unforgettable atmosphere. From the moment you arrive, our team is dedicated to making your visit 
                   comfortable, relaxing, and memorable. Each dish is prepared using high-quality ingredients and thoughtful 

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import loginpagebg from "../assets/loginpagebg.jpg"
+import { apiUrl } from "../utils/apiBase"
 export default function Login() {
 
   const [email, setEmail] = useState("")
@@ -12,7 +13,7 @@ export default function Login() {
     e.preventDefault()
     setError("")
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch(apiUrl("/api/auth/login"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

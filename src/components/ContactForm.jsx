@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiUrl } from "../utils/apiBase";
 
 export default function ContactForm() {
   
@@ -20,7 +21,7 @@ export default function ContactForm() {
     contactForm.append('message', message)
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch(apiUrl('/api/contact'), {
         method: 'POST',
         body: contactForm,
       })
