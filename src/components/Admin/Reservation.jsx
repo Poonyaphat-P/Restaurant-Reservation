@@ -1,18 +1,19 @@
 import {useState, useEffect } from 'react'
 import { Trash2 } from "lucide-react"
+import authFetch from '../../utils/authFetch'
 
 export default function Reservation () {
   const [reservations, setReservations] = useState([])
   
   const handleDelete = async (id) => {
-    await fetch(`/api/admin/reservations/${id}`, {
+    await authFetch(`/api/admin/reservations/${id}`, {
       method: 'DELETE',
     })
     setReservations(reservations.filter(reservation => reservation.id !== id))
   }
 
 useEffect(() => {
-  fetch('/api/admin/reservations')
+  authFetch('/api/admin/reservations')
     .then(res => res.json())
     .then(data => setReservations(data.data))
     .catch(err => console.error(err))

@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link, useLocation } from 'react-router-dom' 
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { clearToken } from '../utils/authFetch'
 
 const navigation = [
   { name: 'Menu', href: '/menu' },
@@ -12,8 +13,14 @@ const navigation = [
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const location = useLocation()                       
-  if (location.pathname === '/admin') return null        
+  const location = useLocation()
+  const navigate = useNavigate()
+  const isAdmin = location.pathname === '/admin'
+
+  const handleLogout = () => {
+    clearToken()
+    navigate('/login')
+  }
 
   return (
     <header className="absolute inset-x-0 top-0 z-50 ">
@@ -41,9 +48,15 @@ export default function Navbar() {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link to="/login" className="text-sm/6 font-semibold text-white">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </Link>
+          {isAdmin ? (
+            <button type="button" onClick={handleLogout} className="text-sm/6 font-semibold text-white">
+              Logout <span aria-hidden="true">&rarr;</span>
+            </button>
+          ) : (
+            <Link to="/login" className="text-sm/6 font-semibold text-white">
+              Log in <span aria-hidden="true">&rarr;</span>
+            </Link>
+          )}
         </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
@@ -77,13 +90,26 @@ export default function Navbar() {
                 ))}
               </div>
               <div className="py-6">
-                <Link
-                  to="/login"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-white hover:bg-white/5"
-                >
-                  Log in
-                </Link>
+                {isAdmin ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      handleLogout()
+                    }}
+                    className="-mx-3 block w-full text-left rounded-lg px-3 py-2.5 text-base/7 font-semibold text-white hover:bg-white/5"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <Link
+                    to="/login"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-white hover:bg-white/5"
+                  >
+                    Log in
+                  </Link>
+                )}
               </div>
             </div>
           </div>

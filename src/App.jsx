@@ -6,8 +6,8 @@ import ReservationPage from './pages/ReservationPage'
 import AboutUsPage from './pages/AboutUs'
 import ContactPage from './pages/ContactPage'
 import LoginPage from './pages/LoginPage'
-import SignupPage from './pages/SignupPage'
 import AdminPage from './pages/AdminPage'
+import RequireAdmin from './components/RequireAdmin'
 
 function App() {
   return (
@@ -21,8 +21,7 @@ function App() {
           <Route path="/about" element={<AboutUsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin" element={<RequireAdmin><AdminPage /></RequireAdmin>} />
         </Routes>
       </div>
     </BrowserRouter>

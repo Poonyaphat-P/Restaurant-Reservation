@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Trash2 } from "lucide-react"
+import authFetch from '../../utils/authFetch'
 
 const STATUS_OPTIONS = ["new", "in_progress", "resolved"]
 const STATUS_STYLE = {
@@ -55,7 +56,7 @@ export default function ReadForm() {
   const [forms, setForms] = useState([])
 
   useEffect(() => {
-    fetch('/api/admin/contact')
+    authFetch('/api/admin/contact')
       .then(res => res.json())
       .then(data => { if (!data.error) setForms(data.data) })
       .catch(err => console.error(err))
@@ -63,7 +64,7 @@ export default function ReadForm() {
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      const res = await fetch(`/api/admin/contact/${id}`, {
+      const res = await authFetch(`/api/admin/contact/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),
@@ -77,7 +78,7 @@ export default function ReadForm() {
   }
 
   const handleDelete = async (id) => {
-    await fetch(`/api/admin/contact/${id}`, { method: "DELETE" })
+    await authFetch(`/api/admin/contact/${id}`, { method: "DELETE" })
     setForms(prev => prev.filter(f => f.id !== id))
   }
 

@@ -67,7 +67,7 @@ export default function ReservationForm() {
   }
   
   return (
-    <div className="pb-12 px-4 sm:px-10 md:px-20 lg:px-40">
+    <div className="pb-12 px-2 sm:px-5 md:px-10 lg:px-20">
       <div className="grid grid-cols-1 md:grid-cols-3 bg-white rounded-2xl md:rounded-full mt-10 shadow-lg">
         <label htmlFor="guests" className="relative bg-white flex items-center justify-center py-4 rounded-t-2xl md:rounded-l-full cursor-pointer hover:bg-gray-200">
           <span className="text-black font-semibold">Guests : {guests}</span>

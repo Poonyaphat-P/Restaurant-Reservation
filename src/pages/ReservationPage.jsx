@@ -11,7 +11,9 @@ export default function ReservationPage() {
         backgroundImage={categoryBg} 
       />
       
-      <ReservationForm />
+      <div className="max-w-6xl mx-auto">
+        <ReservationForm />
+      </div>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import authFetch from '../../utils/authFetch'
 
 export default function DeleteMenu() {
 
@@ -11,7 +12,7 @@ export default function DeleteMenu() {
 
   const handleDelete = async (id) => {
   try {
-    const response = await fetch(`/api/admin/menu/${id}`, {
+    const response = await authFetch(`/api/admin/menu/${id}`, {
       method: 'DELETE'
     })
     const data = await response.json()
@@ -20,16 +21,16 @@ export default function DeleteMenu() {
     setDeletingItem(null)
 
     // โหลดรายการใหม่หลังลบสำเร็จ
-    fetch('/api/admin/menu')
+    authFetch('/api/admin/menu')
       .then(res => res.json())
       .then(d => setItems(d.data))
   } catch (err) {
     console.error('ERROR:', err)
   }
 }
-    
+
   useEffect(() => {
-    fetch('/api/admin/menu')
+    authFetch('/api/admin/menu')
       .then(res => res.json())
       .then(data => {
         console.log("DATA =", data)

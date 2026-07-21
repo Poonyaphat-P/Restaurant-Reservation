@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Image as ImageIcon } from 'lucide-react';
+import authFetch from '../../utils/authFetch';
 
 export default function AddProduct() {
   const [categoryID, setCategoryID] = useState('')
@@ -23,7 +24,7 @@ export default function AddProduct() {
     if (image) formData.append('image', image)
 
     try {
-      const response = await fetch('/api/admin/menu', {
+      const response = await authFetch('/api/admin/menu', {
         method: 'POST',
         body: formData
       })

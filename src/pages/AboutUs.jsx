@@ -12,16 +12,16 @@ function AboutUsPage() {
       />
       <section className="w-full">
         <div className="max-w-6xl mx-auto px-20 py-5">
-          <div className="max-w-4xl p-8">
+          <div className="max-w-4xl mx-auto">
             <h2 className="text-xl text-white font-bold mb-6">
               About KURO
             </h2>
-            <p className="text-md font-thin text-white leading-relaxed pb-5">
+            <p className="text-md text-center font-thin text-white text-justify leading-relaxed pb-5">
               Nestled between quiet streets and the rhythm of the city, the restaurant offers an atmosphere designed to
                slow time and invite conversation. Warm lighting reflects softly across polished surfaces while the aroma 
                of freshly prepared dishes drifts through the dining room. 
             </p>
-            <p className="text-md font-thin text-white leading-relaxed pb-5">
+            <p className="text-md font-thin text-white text-justify leading-relaxed pb-5">
               Every corner is arranged with intention, from the gentle music in the background to the subtle textures woven 
               nto the interior design. Guests often arrive expecting only a meal and leave remembering the experience itself 
               — the calm energy, the carefully crafted presentation, and the feeling of comfort that lingers long after the 
@@ -35,7 +35,7 @@ function AboutUsPage() {
               sophistication, creating a setting where familiar flavors feel elevated and every visit feels slightly different 
               from the last.
             </p>
-            <p className="text-xl text-white font-bold mt-5">
+            <p className="text-xl text-white font-bold mb-5 mt-5">
               Our Teams
             </p>
           </div>

@@ -12,8 +12,8 @@ export default function ContactPage() {
       />
 
       <section className="w-full">
-        <div className="max-w-6xl mx-auto lg-px-20 lg-py-5">
-          <div className="p-8  mx-auto">
+        <div className="max-w-6xl mx-auto px-20 py-5">
+          <div className="pt-8 mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_2fr_1fr] gap-8">
               <div className="place-items-center ">
                 <h2 className="text-xl text-white font-bold mb-6">

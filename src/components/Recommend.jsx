@@ -1,9 +1,21 @@
 import DishCard from './DishCard'
 import Review from './Review'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 export default function Recommend() {
   const [menuItems, setMenuItems] = useState([])
+
+  const scrollRef = useRef(null)
+
+  const scroll = (direction) => {
+    const el = scrollRef.current
+    if (!el) return
+    const card = el.firstElementChild
+    if (!card) return
+    const gap = parseFloat(getComputedStyle(el).columnGap) || 0
+    const step = card.getBoundingClientRect().width + gap
+    el.scrollBy({ left: direction * step, behavior: 'smooth' })
+  }
 
   useEffect(() => {
     fetch('/api/menu')
@@ -23,27 +35,44 @@ export default function Recommend() {
         Signature Flavors of KURO
       </p>
 
-      {/* 1. Create a wrapper for the cards */}
-      <div className="mx-15 mt-10 px-16 flex overflow-x-auto gap-8 pb-8 snap-x" style={{ scrollbarWidth: 'none' }}>
-        
-        {/* 2. Map over menuItems state */}
-        {menuItems.filter(item => item.is_recommended).map((item) => (
-          <div key={item.id} className="w-[220px] sm:w-[280px] flex-shrink-0 snap-start">
-            <DishCard 
-              title={item.name}
-              price={`฿${item.price}`}
-              image={item.image}
-              description={item.description}
-            />
-          </div>
-        ))}
+      <div className="relative flex items-center justify-center gap-2 px-16">
+        <button
+          aria-label="Previous"
+          className="shrink-0 text-white text-3xl px-2 hover:opacity-70"
+          onClick={() => scroll(-1)}
+        >
+          ‹
+        </button>
 
-        {menuItems.filter(item => item.is_recommended).length === 0 && (
-          <div className="w-full text-center text-gray-500 py-10">
-            No recommended dishes yet. Mark items as "Show on Homepage" in the admin panel.
-          </div>
-        )}
+        <div
+          className="flex w-full gap-2 overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          ref={scrollRef}
+        >
+          {menuItems.filter(item => item.is_recommended).map((item) => (
+            <div key={item.id} className="snap-start shrink-0 grow-0 basis-full sm:basis-[calc(50%_-_0.25rem)] lg:basis-[calc(33.333%_-_0.333rem)] w-[220px] sm:w-[280px]">
+              <DishCard
+                title={item.name}
+                price={`฿${item.price}`}
+                image={item.image}
+                description={item.description}
+              />
+            </div>
+          ))}
 
+          {menuItems.filter(item => item.is_recommended).length === 0 && (
+            <div className="w-full text-center text-gray-500 py-10">
+              No recommended dishes yet. Mark items as "Show on Homepage" in the admin panel.
+            </div>
+          )}
+        </div>
+
+        <button
+          aria-label="Next"
+          className="shrink-0 text-white text-3xl px-2 hover:opacity-70"
+          onClick={() => scroll(1)}
+        >
+          ›
+        </button>
       </div>
 
       <p className="text-white text-left text-5xl px-16 mt-10 font-semibold">

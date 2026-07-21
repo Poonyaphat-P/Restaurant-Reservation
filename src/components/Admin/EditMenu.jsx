@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import { Image as ImageIcon } from 'lucide-react'
+import authFetch from '../../utils/authFetch'
 
 export default function EditMenu() {
 
@@ -19,12 +20,12 @@ export default function EditMenu() {
   
   const handleRecommendToggle = async (id, value) => {
     try {
-      await fetch(`/api/admin/menu/${id}/recommend`, {
+      await authFetch(`/api/admin/menu/${id}/recommend`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ is_recommended: value ? 1 : 0 })
       })
-      const res = await fetch('/api/admin/menu')
+      const res = await authFetch('/api/admin/menu')
       const data = await res.json()
       setItems(data.data)
     } catch (err) {
@@ -54,7 +55,7 @@ export default function EditMenu() {
       formData.append('is_recommended', isRecommended ? '1' : '0')
       if (image instanceof File) formData.append('image', image)
 
-      const response = await fetch('/api/admin/menu', {
+      const response = await authFetch('/api/admin/menu', {
         method: 'PUT',
         body: formData
       })
@@ -62,7 +63,7 @@ export default function EditMenu() {
       console.log('Response:', data)
 
       setEditingItem(null)
-      fetch('/api/admin/menu')
+      authFetch('/api/admin/menu')
         .then(res => res.json())
         .then(d => setItems(d.data))
     } catch (err) {
@@ -72,7 +73,7 @@ export default function EditMenu() {
 
   const toggleRecommend = async (id, current) => {
     try {
-      await fetch(`/api/admin/menu/${id}/recommend`, {
+      await authFetch(`/api/admin/menu/${id}/recommend`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ is_recommended: !current })
@@ -89,7 +90,7 @@ export default function EditMenu() {
     
   
   useEffect(() => {
-    fetch('/api/admin/menu')
+    authFetch('/api/admin/menu')
       .then(res => res.json())
       .then(data => {
         console.log("DATA =", data)
